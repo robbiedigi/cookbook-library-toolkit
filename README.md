@@ -185,8 +185,7 @@ Current boundaries:
 
 - Twelve recipe selections demonstrate the recipe interface; the 723 passages provide broader cooking coverage. Medical and household sections, front matter and indexes are outside the declared import boundaries.
 - Recipe quantities and instructions remain in prose. Structured ingredient identities, serving yields, classifications and dependency acceptance need a separate source-review workflow.
-- Historical advice may be unsuitable for modern cooking or food safety. All imported records carry that qualification. No recipe is marked personally tested.
-- MCP search is lexical; synonyms, implicit concepts and paraphrases can be missed. Optional hybrid search has separate commands and no claimed quality advantage without comparative evaluation.
+- MCP search is lexical; synonyms, implicit concepts and paraphrases can be missed. Optional hybrid search has separate commands.
 - EPUB extraction requires an inspected layout profile. Photographed-PDF extraction currently uses macOS Apple Vision with Docling, followed by human source review; it is not a universal automatic importer.
 - The PDF example replays synthetic OCR evidence. It does not demonstrate actual OCR accuracy. A chat UI and automatic EPUB/PDF-to-v2 promotion are outside the supplied workflows.
 

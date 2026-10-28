@@ -35,7 +35,7 @@ Local validation used macOS on Apple Silicon with Python 3.14. The initial core-
 
 Synthetic tests cover required and optional ingredient occurrence distinctions, derivative/homonym matching, source-bound relationship revisions, dependency choices, cycles, partial failures, immutable reads and oversize delivery. They use explicitly invented examples. Two private-corpus-only test classes, one test coupled to a private batch-audit runner and the private full-corpus evaluation runner are omitted from the public distribution.
 
-The CI matrix is configured for Linux/Python 3.10, 3.12 and 3.14. Local validation is recorded separately; this file does not claim that CI has run in a new public repository or that a hosted service has been deployed.
+The CI matrix covers Linux/Python 3.12 and 3.14, Windows/Python 3.12 and macOS/Python 3.14. UTF-8 mode is enabled for cross-platform text handling. Check the repository Actions runs for exact revisions and job results; these checks do not establish hosted service deployment or live OCR accuracy.
 
 ## Toolkit validation
 

@@ -47,7 +47,7 @@ Prefer guided setup? Give your cloned repository to your preferred coding agent 
 
 ## Try it
 
-Use Python 3.10+ with SQLite FTS5. From this repository or the unzipped distribution:
+Use Python 3.12+ with SQLite FTS5; the pinned dependency set does not support Python 3.10. Clone this repository or unzip the distribution, then open a terminal in its root folder:
 
 ```sh
 python3 -m venv .venv
@@ -65,7 +65,7 @@ cookbook-demo call search_knowledge '{"query":"pastry"}'
 cookbook-demo sources
 ```
 
-On Windows, activate with `.venv\Scripts\activate`. Only the initial package installation and source download require network access. Downloads are cached under `data/downloads/`. To reproduce a build offline, use a new destination:
+On Windows PowerShell, set `$env:PYTHONUTF8="1"` and activate with `.venv\Scripts\Activate.ps1`; in Command Prompt use `set PYTHONUTF8=1` and `.venv\Scripts\activate.bat`. Keep UTF-8 mode enabled when running the tools so cookbook text retains its Unicode characters. Only the initial package installation and source download require network access. Downloads are cached under `data/downloads/`. To reproduce a build offline, use a new destination:
 
 ```sh
 cookbook-demo import --offline --output data/demo-rebuild
@@ -255,7 +255,7 @@ python -m unittest discover -s tests/v2 -v
 python scripts/verify_demo.py --library data/demo --output data/verification.json
 ```
 
-The unit suites use synthetic data and need no downloaded books. The full-demo check uses your local import. CI is configured for Python 3.10, 3.12 and 3.14 on Linux; a workflow definition is not a claim that hosted CI has already run.
+The unit suites use synthetic data and need no downloaded books. The full-demo check uses your local import. CI covers Python 3.12 and 3.14 on Linux, Python 3.12 on Windows and Python 3.14 on macOS. See the [Actions runs](https://github.com/robbiedigi/cookbook-library-toolkit/actions) for actual results; live PDF OCR is outside this test matrix.
 
 | Location | Responsibility |
 |---|---|

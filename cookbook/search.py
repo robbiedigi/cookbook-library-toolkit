@@ -8,6 +8,7 @@ import re
 import sqlite3
 import unicodedata
 from collections import defaultdict
+from contextlib import closing
 from functools import lru_cache
 from pathlib import Path
 
@@ -248,7 +249,7 @@ def build_index(data_dir, reuse_from=None):
                   for k, text in zip(('content', 'profile'), embedding_texts(r, recipe_profile(r, prior_profiles)))}
         # The saved SQL profile is part of the actual embedding input. A later
         # profile/rule change must not make an old vector look reusable.
-        with sqlite3.connect(reuse_from / 'search.sqlite') as db:
+        with closing(sqlite3.connect(reuse_from / 'search.sqlite')) as db, db:
             saved_inputs = {(rid, k): text for rid, record, profile in db.execute('SELECT id,record,profile FROM recipes')
                             for k, text in zip(('content', 'profile'), embedding_texts(json.loads(record), json.loads(profile)))}
         if inputs != saved_inputs: raise ValueError('Recipe vector cache profile mismatch')
@@ -266,7 +267,7 @@ def build_index(data_dir, reuse_from=None):
     vectors = np.array([cached[key] if key in cached else produced[i] for i, key in enumerate(keys)], dtype=np.float32)
     np.savez_compressed(data_dir / "vectors.npz", vectors=vectors, ids=np.array(ids), kinds=np.array(kinds))
     dbpath = data_dir / "search.sqlite"
-    with sqlite3.connect(dbpath) as db:
+    with closing(sqlite3.connect(dbpath)) as db, db:
         db.executescript("DROP TABLE IF EXISTS recipes; DROP TABLE IF EXISTS recipe_fts; CREATE TABLE recipes(id TEXT PRIMARY KEY, record TEXT NOT NULL, profile TEXT NOT NULL); CREATE VIRTUAL TABLE recipe_fts USING fts5(id UNINDEXED, title, ingredients, description, tokenize='unicode61 remove_diacritics 2');")
         for r in recipes:
             p = recipe_profile(r, profiles)
@@ -337,7 +338,7 @@ def llm_plan(query, base):
 class SearchEngine:
     def __init__(self, data_dir):
         self.data_dir = data_dir
-        with sqlite3.connect(data_dir / "search.sqlite") as db:
+        with closing(sqlite3.connect(data_dir / "search.sqlite")) as db, db:
             rows = db.execute("SELECT id,record,profile FROM recipes").fetchall()
         self.recipes = {rid: json.loads(r) for rid, r, p in rows}
         self.profiles = {rid: json.loads(p) for rid, r, p in rows}
@@ -424,7 +425,7 @@ class SearchEngine:
             if getattr(self, "keyword_db", None) is not None:
                 matches = self.keyword_db.execute(sql, (expression,)).fetchall()
             else:
-                with sqlite3.connect(self.data_dir / "search.sqlite") as db:
+                with closing(sqlite3.connect(self.data_dir / "search.sqlite")) as db, db:
                     matches = db.execute(sql, (expression,)).fetchall()
             add([rid for (rid,) in matches if rid in eligible], "keyword")
         nq = normalize(query).strip()

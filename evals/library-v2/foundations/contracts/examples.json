@@ -1,0 +1,1532 @@
+{
+  "notice": "DRAFT synthetic schema fixtures. Text, IDs and zero hashes are not source or validation evidence; source bindings are intentionally placeholders.",
+  "canonical": [
+    {
+      "schema_version": "library-v2-draft-1",
+      "entity": "book",
+      "id": "demo:edition",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "title": "Synthetic contract fixture",
+      "aliases": [],
+      "authors": [],
+      "edition_label": null,
+      "isbn": null,
+      "legacy_book_id": "demo:edition",
+      "assets": [
+        {
+          "sha256": null,
+          "format": "unknown",
+          "archive_ref": null
+        }
+      ]
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:recipe",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic tomato tart",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "recipe",
+      "aliases": [],
+      "yield": {
+        "text": "Serves 4",
+        "basis": "source",
+        "evidence_refs": []
+      },
+      "ingredient_groups": [
+        {
+          "id": "demo:filling",
+          "title": "Filling",
+          "blocks": [
+            {
+              "id": "demo:i1",
+              "kind": "text",
+              "role": "ingredient",
+              "text": "2 tomatoes",
+              "basis": "source",
+              "source_spans": [
+                {
+                  "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "source_block_id": "demo:block",
+                  "start": 0,
+                  "end": 12,
+                  "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "citation_id": "demo:citation"
+                }
+              ],
+              "evidence_refs": []
+            }
+          ]
+        }
+      ],
+      "method_blocks": [
+        {
+          "id": "demo:m1",
+          "kind": "text",
+          "role": "method",
+          "text": "Arrange the tomatoes in the prepared shell.",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": []
+        }
+      ],
+      "headnotes": [],
+      "notes": [],
+      "additional_context": [],
+      "classification": {
+        "kind": "dish",
+        "dish_type": "tart",
+        "status": "source_bound_assessment",
+        "uncertain_fields": [],
+        "evidence_ref": "demo:label-review"
+      },
+      "dependency_coverage": {
+        "status": "reviewed_bounded",
+        "scope": "Synthetic direct-reference fixture.",
+        "limitations": []
+      },
+      "variant_exclusions": []
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:pastry",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic pastry",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "recipe",
+      "aliases": [],
+      "yield": {
+        "text": "Makes 2 shells",
+        "basis": "source",
+        "evidence_refs": []
+      },
+      "ingredient_groups": [
+        {
+          "id": "demo:pastry-group",
+          "title": null,
+          "blocks": [
+            {
+              "id": "demo:pi1",
+              "kind": "text",
+              "role": "ingredient",
+              "text": "300 g flour",
+              "basis": "source",
+              "source_spans": [
+                {
+                  "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "source_block_id": "demo:block",
+                  "start": 0,
+                  "end": 12,
+                  "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "citation_id": "demo:citation"
+                }
+              ],
+              "evidence_refs": []
+            }
+          ]
+        }
+      ],
+      "method_blocks": [
+        {
+          "id": "demo:pm1",
+          "kind": "text",
+          "role": "method",
+          "text": "Mix and rest the dough.",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": []
+        }
+      ],
+      "headnotes": [],
+      "notes": [],
+      "additional_context": [],
+      "classification": {
+        "kind": "component",
+        "dish_type": "dough",
+        "status": "source_bound_assessment",
+        "uncertain_fields": [],
+        "evidence_ref": "demo:label-review"
+      },
+      "dependency_coverage": {
+        "status": "reviewed_bounded",
+        "scope": "Synthetic direct-reference fixture.",
+        "limitations": []
+      },
+      "variant_exclusions": []
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:uncertain-pdf",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic qualified pudding",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [
+        {
+          "code": "missing_bake_duration",
+          "message": "The retained source gives no bake duration.",
+          "affects": [
+            "demo:m1"
+          ],
+          "action": "source_gap",
+          "citation_ids": [
+            "demo:citation"
+          ]
+        }
+      ],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "recipe",
+      "aliases": [],
+      "yield": {
+        "text": null,
+        "basis": "unknown",
+        "evidence_refs": []
+      },
+      "ingredient_groups": [
+        {
+          "id": "demo:qualified-group",
+          "title": null,
+          "blocks": [
+            {
+              "id": "demo:qi1",
+              "kind": "text",
+              "role": "ingredient",
+              "text": "1 tbsp sugar",
+              "basis": "accepted_correction",
+              "source_spans": [
+                {
+                  "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "source_block_id": "demo:block",
+                  "start": 0,
+                  "end": 12,
+                  "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "citation_id": "demo:citation"
+                }
+              ],
+              "evidence_refs": [
+                "demo:accepted-edit"
+              ]
+            }
+          ]
+        }
+      ],
+      "method_blocks": [
+        {
+          "id": "demo:m1",
+          "kind": "text",
+          "role": "method",
+          "text": "Arrange the tomatoes in the prepared shell.",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": []
+        }
+      ],
+      "headnotes": [],
+      "notes": [],
+      "additional_context": [],
+      "classification": {
+        "kind": "dish",
+        "dish_type": "tart",
+        "status": "source_bound_assessment",
+        "uncertain_fields": [],
+        "evidence_ref": "demo:label-review"
+      },
+      "dependency_coverage": {
+        "status": "unknown",
+        "scope": "No accepted dependency review.",
+        "limitations": []
+      },
+      "variant_exclusions": []
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:menu",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic summer lunch",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "knowledge",
+      "kind": "menu",
+      "heading_path": [
+        "Menus",
+        "Summer"
+      ],
+      "blocks": [
+        {
+          "id": "demo:menu-line",
+          "kind": "text",
+          "role": "prose",
+          "text": "Tomato tart or chilled soup; purchased bread.",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": []
+        }
+      ],
+      "topics": [
+        "menu_planning"
+      ],
+      "uncertain_topics": [],
+      "topic_status": "source_bound_assessment",
+      "related_recipe_ids": [
+        "demo:recipe"
+      ],
+      "dependency_coverage": {
+        "status": "reviewed_bounded",
+        "scope": "Synthetic direct-reference fixture.",
+        "limitations": []
+      },
+      "menu": {
+        "occasion": "Lunch",
+        "guest_count_text": null,
+        "dishes": [
+          {
+            "id": "demo:d1",
+            "text": "Tomato tart",
+            "recipe_id": "demo:recipe",
+            "role": null,
+            "multiplier_text": null,
+            "alternative_group": "demo:main-choice",
+            "source_block_ids": [
+              "demo:menu-line"
+            ]
+          },
+          {
+            "id": "demo:d2",
+            "text": "Chilled soup",
+            "recipe_id": null,
+            "role": null,
+            "multiplier_text": null,
+            "alternative_group": "demo:main-choice",
+            "source_block_ids": [
+              "demo:menu-line"
+            ]
+          },
+          {
+            "id": "demo:d3",
+            "text": "Purchased bread",
+            "recipe_id": null,
+            "role": null,
+            "multiplier_text": null,
+            "alternative_group": null,
+            "source_block_ids": [
+              "demo:menu-line"
+            ]
+          }
+        ],
+        "preparation_note_block_ids": []
+      }
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:method",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic shaping excerpt",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "knowledge",
+      "kind": "method",
+      "heading_path": [
+        "Shaping"
+      ],
+      "blocks": [
+        {
+          "id": "demo:shape",
+          "kind": "text",
+          "role": "method",
+          "text": "Shape the dough.",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": []
+        }
+      ],
+      "topics": [
+        "technique"
+      ],
+      "uncertain_topics": [],
+      "topic_status": "source_bound_assessment",
+      "related_recipe_ids": [
+        "demo:pastry"
+      ],
+      "dependency_coverage": {
+        "status": "reviewed_bounded",
+        "scope": "Synthetic direct-reference fixture.",
+        "limitations": []
+      },
+      "selection": {
+        "source_node": {
+          "entity": "recipe",
+          "id": "demo:pastry"
+        },
+        "scope": "Shaping only; excludes sibling filling instructions.",
+        "included_spans": [
+          {
+            "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "source_block_id": "demo:block",
+            "start": 0,
+            "end": 12,
+            "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "citation_id": "demo:citation"
+          }
+        ],
+        "excluded_spans": [
+          {
+            "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "source_block_id": "demo:sibling",
+            "start": 0,
+            "end": 12,
+            "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "citation_id": "demo:citation"
+          }
+        ],
+        "review_ref": "demo:selection-review",
+        "source_binding_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:table",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic pan reference",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "knowledge",
+      "kind": "reference",
+      "heading_path": [
+        "Shaping"
+      ],
+      "blocks": [
+        {
+          "id": "demo:table-block",
+          "kind": "table",
+          "role": "prose",
+          "text": "Pan reference",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": [],
+          "rows": [
+            [
+              "Pan",
+              "Volume"
+            ],
+            [
+              "Small",
+              "1 litre"
+            ]
+          ],
+          "header_rows": [
+            0
+          ]
+        }
+      ],
+      "topics": [
+        "technique"
+      ],
+      "uncertain_topics": [],
+      "topic_status": "source_bound_assessment",
+      "related_recipe_ids": [
+        "demo:pastry"
+      ],
+      "dependency_coverage": {
+        "status": "reviewed_bounded",
+        "scope": "Synthetic direct-reference fixture.",
+        "limitations": []
+      }
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:e1",
+      "from": {
+        "entity": "recipe",
+        "id": "demo:recipe"
+      },
+      "target": {
+        "entity": "recipe",
+        "id": "demo:pastry"
+      },
+      "kind": "component",
+      "disposition": "required",
+      "application": "Use one shell; the component recipe makes its own two-shell batch.",
+      "choice_group": null,
+      "evidence_spans": [
+        {
+          "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "source_block_id": "demo:block",
+          "start": 0,
+          "end": 12,
+          "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "citation_id": "demo:citation"
+        }
+      ],
+      "review_ref": "demo:dependency-review",
+      "review_status": "accepted",
+      "bindings": [
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:recipe"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:pastry"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "assembly_sha256": null
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:choice1",
+      "from": {
+        "entity": "recipe",
+        "id": "demo:recipe"
+      },
+      "target": {
+        "entity": "recipe",
+        "id": "demo:pastry"
+      },
+      "kind": "component",
+      "disposition": "choice",
+      "application": "Use one shell; the component recipe makes its own two-shell batch.",
+      "choice_group": "demo:shell-choice",
+      "evidence_spans": [
+        {
+          "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "source_block_id": "demo:block",
+          "start": 0,
+          "end": 12,
+          "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "citation_id": "demo:citation"
+        }
+      ],
+      "review_ref": "demo:dependency-review",
+      "review_status": "accepted",
+      "bindings": [
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:recipe"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:pastry"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "assembly_sha256": null
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:choice2",
+      "from": {
+        "entity": "recipe",
+        "id": "demo:recipe"
+      },
+      "target": {
+        "entity": "recipe",
+        "id": "demo:alternate-pastry"
+      },
+      "kind": "component",
+      "disposition": "choice",
+      "application": "Use one shell; the component recipe makes its own two-shell batch.",
+      "choice_group": "demo:shell-choice",
+      "evidence_spans": [
+        {
+          "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "source_block_id": "demo:block",
+          "start": 0,
+          "end": 12,
+          "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "citation_id": "demo:citation"
+        }
+      ],
+      "review_ref": "demo:dependency-review",
+      "review_status": "accepted",
+      "bindings": [
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:recipe"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:pastry"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "assembly_sha256": null
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:variant",
+      "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+      "edition_id": "demo:edition",
+      "title": "Synthetic cucumber variation",
+      "citations": [
+        {
+          "id": "demo:citation",
+          "edition_id": "demo:edition",
+          "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "book": "Synthetic contract fixture",
+          "author": "Example only",
+          "format": "pdf",
+          "printed_labels": [
+            "32"
+          ],
+          "pdf_file_pages": [
+            31
+          ],
+          "epub_member": null,
+          "epub_anchor": null,
+          "location_scope": "block"
+        }
+      ],
+      "uncertainties": [],
+      "provenance": {
+        "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "archive_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "review_refs": []
+      },
+      "entity": "recipe",
+      "aliases": [],
+      "yield": {
+        "text": "Serves 4",
+        "basis": "source",
+        "evidence_refs": []
+      },
+      "ingredient_groups": [
+        {
+          "id": "demo:filling",
+          "title": "Filling",
+          "blocks": [
+            {
+              "id": "demo:i1",
+              "kind": "text",
+              "role": "ingredient",
+              "text": "2 tomatoes",
+              "basis": "source",
+              "source_spans": [
+                {
+                  "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "source_block_id": "demo:block",
+                  "start": 0,
+                  "end": 12,
+                  "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "citation_id": "demo:citation"
+                }
+              ],
+              "evidence_refs": []
+            }
+          ]
+        }
+      ],
+      "method_blocks": [
+        {
+          "id": "demo:m1",
+          "kind": "text",
+          "role": "method",
+          "text": "Arrange the tomatoes in the prepared shell.",
+          "basis": "source",
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "evidence_refs": []
+        }
+      ],
+      "headnotes": [],
+      "notes": [],
+      "additional_context": [],
+      "classification": {
+        "kind": "dish",
+        "dish_type": "tart",
+        "status": "source_bound_assessment",
+        "uncertain_fields": [],
+        "evidence_ref": "demo:label-review"
+      },
+      "dependency_coverage": {
+        "status": "reviewed_bounded",
+        "scope": "Synthetic direct-reference fixture.",
+        "limitations": []
+      },
+      "variant_exclusions": [
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:recipe"
+          },
+          "source_spans": [
+            {
+              "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "source_block_id": "demo:block",
+              "start": 0,
+              "end": 12,
+              "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+              "citation_id": "demo:citation"
+            }
+          ],
+          "reason": "Base tomato filling is replaced."
+        }
+      ]
+    },
+    {
+      "schema_version": "library-v2-draft-1",
+      "id": "demo:assembled",
+      "from": {
+        "entity": "recipe",
+        "id": "demo:variant"
+      },
+      "target": {
+        "entity": "recipe",
+        "id": "demo:recipe"
+      },
+      "kind": "variation_of",
+      "disposition": "assembled",
+      "application": "Already assembled variation; do not traverse the replaced base.",
+      "choice_group": null,
+      "evidence_spans": [
+        {
+          "source_record_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "source_block_id": "demo:block",
+          "start": 0,
+          "end": 12,
+          "text_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+          "citation_id": "demo:citation"
+        }
+      ],
+      "review_ref": "demo:dependency-review",
+      "review_status": "accepted",
+      "bindings": [
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:recipe"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        },
+        {
+          "node": {
+            "entity": "recipe",
+            "id": "demo:pastry"
+          },
+          "revision": "0000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "assembly_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "requests": [
+    {
+      "tool": "search_recipes",
+      "arguments": {
+        "filters": {
+          "kind": [
+            "dish"
+          ],
+          "dish_type": [
+            "tart"
+          ]
+        },
+        "limit": 20
+      }
+    },
+    {
+      "tool": "get_recipes",
+      "arguments": {
+        "recipe_ids": [
+          "demo:recipe",
+          "demo:missing"
+        ]
+      }
+    },
+    {
+      "tool": "search_knowledge",
+      "arguments": {
+        "query": "summer lunch",
+        "kinds": [
+          "menu"
+        ]
+      }
+    },
+    {
+      "tool": "get_passages",
+      "arguments": {
+        "passage_ids": [
+          "demo:menu",
+          "demo:method"
+        ]
+      }
+    }
+  ],
+  "responses": [
+    {
+      "tool": "search_recipes",
+      "response": {
+        "schema_version": "library-v2-draft-1",
+        "snapshot": "demo:release",
+        "page_index": 0,
+        "next_cursor": null,
+        "complete": true,
+        "errors": [],
+        "mode": "enumeration",
+        "total": 1,
+        "items": [
+          {
+            "id": "demo:recipe",
+            "title": "Synthetic tomato tart",
+            "book_id": "demo:edition",
+            "kind": "dish",
+            "dish_type": "tart",
+            "excerpt": "2 tomatoes",
+            "citations": [
+              {
+                "id": "demo:citation",
+                "edition_id": "demo:edition",
+                "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                "book": "Synthetic contract fixture",
+                "author": "Example only",
+                "format": "pdf",
+                "printed_labels": [
+                  "32"
+                ],
+                "pdf_file_pages": [
+                  31
+                ],
+                "epub_member": null,
+                "epub_anchor": null,
+                "location_scope": "block"
+              }
+            ],
+            "uncertainties": []
+          }
+        ]
+      }
+    },
+    {
+      "tool": "get_recipes",
+      "response": {
+        "schema_version": "library-v2-draft-1",
+        "snapshot": "demo:release",
+        "page_index": 0,
+        "next_cursor": null,
+        "complete": true,
+        "errors": [],
+        "requested_ids": [
+          "demo:recipe",
+          "demo:missing"
+        ],
+        "roots": [
+          {
+            "id": "demo:recipe",
+            "status": "ok",
+            "dependency_coverage": {
+              "status": "reviewed_bounded",
+              "scope": "Synthetic direct-reference fixture.",
+              "limitations": []
+            },
+            "error": null
+          },
+          {
+            "id": "demo:missing",
+            "status": "error",
+            "dependency_coverage": {
+              "status": "unknown",
+              "scope": "Synthetic direct-reference fixture.",
+              "limitations": []
+            },
+            "error": {
+              "code": "NOT_FOUND",
+              "id": "demo:missing",
+              "message": "No recipe has this ID.",
+              "retry": "correct_input"
+            }
+          }
+        ],
+        "items": [
+          {
+            "node": {
+              "entity": "recipe",
+              "id": "demo:recipe"
+            },
+            "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+            "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "part_index": 0,
+            "complete": true,
+            "content": {
+              "schema_version": "library-v2-draft-1",
+              "id": "demo:recipe",
+              "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+              "edition_id": "demo:edition",
+              "title": "Synthetic tomato tart",
+              "citations": [
+                {
+                  "id": "demo:citation",
+                  "edition_id": "demo:edition",
+                  "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "book": "Synthetic contract fixture",
+                  "author": "Example only",
+                  "format": "pdf",
+                  "printed_labels": [
+                    "32"
+                  ],
+                  "pdf_file_pages": [
+                    31
+                  ],
+                  "epub_member": null,
+                  "epub_anchor": null,
+                  "location_scope": "block"
+                }
+              ],
+              "uncertainties": [],
+              "entity": "recipe",
+              "aliases": [],
+              "yield": {
+                "text": "Serves 4",
+                "basis": "source"
+              },
+              "ingredient_groups": [
+                {
+                  "id": "demo:filling",
+                  "title": "Filling",
+                  "blocks": [
+                    {
+                      "id": "demo:i1",
+                      "kind": "text",
+                      "role": "ingredient",
+                      "text": "2 tomatoes",
+                      "basis": "source"
+                    }
+                  ]
+                }
+              ],
+              "method_blocks": [
+                {
+                  "id": "demo:m1",
+                  "kind": "text",
+                  "role": "method",
+                  "text": "Arrange the tomatoes in the prepared shell.",
+                  "basis": "source"
+                }
+              ],
+              "headnotes": [],
+              "notes": [],
+              "additional_context": [],
+              "classification": {
+                "kind": "dish",
+                "dish_type": "tart",
+                "status": "source_bound_assessment",
+                "uncertain_fields": []
+              },
+              "dependency_coverage": {
+                "status": "reviewed_bounded",
+                "scope": "Synthetic direct-reference fixture.",
+                "limitations": []
+              }
+            }
+          },
+          {
+            "node": {
+              "entity": "recipe",
+              "id": "demo:pastry"
+            },
+            "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+            "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "part_index": 0,
+            "complete": true,
+            "content": {
+              "schema_version": "library-v2-draft-1",
+              "id": "demo:pastry",
+              "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+              "edition_id": "demo:edition",
+              "title": "Synthetic pastry",
+              "citations": [
+                {
+                  "id": "demo:citation",
+                  "edition_id": "demo:edition",
+                  "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "book": "Synthetic contract fixture",
+                  "author": "Example only",
+                  "format": "pdf",
+                  "printed_labels": [
+                    "32"
+                  ],
+                  "pdf_file_pages": [
+                    31
+                  ],
+                  "epub_member": null,
+                  "epub_anchor": null,
+                  "location_scope": "block"
+                }
+              ],
+              "uncertainties": [],
+              "entity": "recipe",
+              "aliases": [],
+              "yield": {
+                "text": "Makes 2 shells",
+                "basis": "source"
+              },
+              "ingredient_groups": [
+                {
+                  "id": "demo:pastry-group",
+                  "title": null,
+                  "blocks": [
+                    {
+                      "id": "demo:pi1",
+                      "kind": "text",
+                      "role": "ingredient",
+                      "text": "300 g flour",
+                      "basis": "source"
+                    }
+                  ]
+                }
+              ],
+              "method_blocks": [
+                {
+                  "id": "demo:pm1",
+                  "kind": "text",
+                  "role": "method",
+                  "text": "Mix and rest the dough.",
+                  "basis": "source"
+                }
+              ],
+              "headnotes": [],
+              "notes": [],
+              "additional_context": [],
+              "classification": {
+                "kind": "component",
+                "dish_type": "dough",
+                "status": "source_bound_assessment",
+                "uncertain_fields": []
+              },
+              "dependency_coverage": {
+                "status": "reviewed_bounded",
+                "scope": "Synthetic direct-reference fixture.",
+                "limitations": []
+              }
+            }
+          }
+        ],
+        "relationships": [
+          {
+            "id": "demo:e1",
+            "from": {
+              "entity": "recipe",
+              "id": "demo:recipe"
+            },
+            "target": {
+              "entity": "recipe",
+              "id": "demo:pastry"
+            },
+            "kind": "component",
+            "disposition": "required",
+            "application": "Use one shell; the component recipe makes its own two-shell batch.",
+            "choice_group": null
+          }
+        ],
+        "issues": []
+      }
+    },
+    {
+      "tool": "get_passages",
+      "response": {
+        "schema_version": "library-v2-draft-1",
+        "snapshot": "demo:release",
+        "page_index": 0,
+        "next_cursor": null,
+        "complete": true,
+        "errors": [],
+        "requested_ids": [
+          "demo:menu"
+        ],
+        "roots": [],
+        "items": [
+          {
+            "node": {
+              "entity": "knowledge",
+              "id": "demo:menu"
+            },
+            "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+            "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "part_index": 0,
+            "complete": true,
+            "content": {
+              "schema_version": "library-v2-draft-1",
+              "id": "demo:menu",
+              "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+              "edition_id": "demo:edition",
+              "title": "Synthetic summer lunch",
+              "citations": [
+                {
+                  "id": "demo:citation",
+                  "edition_id": "demo:edition",
+                  "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "book": "Synthetic contract fixture",
+                  "author": "Example only",
+                  "format": "pdf",
+                  "printed_labels": [
+                    "32"
+                  ],
+                  "pdf_file_pages": [
+                    31
+                  ],
+                  "epub_member": null,
+                  "epub_anchor": null,
+                  "location_scope": "block"
+                }
+              ],
+              "uncertainties": [],
+              "entity": "knowledge",
+              "kind": "menu",
+              "heading_path": [
+                "Menus",
+                "Summer"
+              ],
+              "blocks": [
+                {
+                  "id": "demo:menu-line",
+                  "kind": "text",
+                  "role": "prose",
+                  "text": "Tomato tart or chilled soup; purchased bread.",
+                  "basis": "source"
+                }
+              ],
+              "topics": [
+                "menu_planning"
+              ],
+              "uncertain_topics": [],
+              "topic_status": "source_bound_assessment",
+              "related_recipe_ids": [
+                "demo:recipe"
+              ],
+              "dependency_coverage": {
+                "status": "reviewed_bounded",
+                "scope": "Synthetic direct-reference fixture.",
+                "limitations": []
+              },
+              "menu": {
+                "occasion": "Lunch",
+                "guest_count_text": null,
+                "dishes": [
+                  {
+                    "id": "demo:d1",
+                    "text": "Tomato tart",
+                    "recipe_id": "demo:recipe",
+                    "role": null,
+                    "multiplier_text": null,
+                    "alternative_group": "demo:main-choice",
+                    "source_block_ids": [
+                      "demo:menu-line"
+                    ]
+                  },
+                  {
+                    "id": "demo:d2",
+                    "text": "Chilled soup",
+                    "recipe_id": null,
+                    "role": null,
+                    "multiplier_text": null,
+                    "alternative_group": "demo:main-choice",
+                    "source_block_ids": [
+                      "demo:menu-line"
+                    ]
+                  },
+                  {
+                    "id": "demo:d3",
+                    "text": "Purchased bread",
+                    "recipe_id": null,
+                    "role": null,
+                    "multiplier_text": null,
+                    "alternative_group": null,
+                    "source_block_ids": [
+                      "demo:menu-line"
+                    ]
+                  }
+                ],
+                "preparation_note_block_ids": []
+              }
+            }
+          }
+        ],
+        "relationships": [],
+        "issues": []
+      }
+    },
+    {
+      "tool": "get_recipes",
+      "response": {
+        "schema_version": "library-v2-draft-1",
+        "snapshot": "demo:release",
+        "page_index": 0,
+        "next_cursor": "demo:opaque-continuation",
+        "complete": false,
+        "errors": [],
+        "requested_ids": [
+          "demo:oversized"
+        ],
+        "roots": [],
+        "relationships": [],
+        "issues": [],
+        "items": [
+          {
+            "node": {
+              "entity": "recipe",
+              "id": "demo:oversized"
+            },
+            "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+            "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "part_index": 0,
+            "complete": false,
+            "header": {
+              "id": "demo:oversized",
+              "title": "Synthetic oversized record"
+            },
+            "segments": [
+              {
+                "section": "method_blocks",
+                "index": 0,
+                "group_id": null,
+                "group_title": null,
+                "block": {
+                  "id": "demo:long-block",
+                  "kind": "text",
+                  "role": "method",
+                  "text": "Cross-page "
+                },
+                "text_range": {
+                  "start": 0,
+                  "end": 11,
+                  "total_characters": 18
+                },
+                "citations": [
+                  {
+                    "id": "demo:citation",
+                    "edition_id": "demo:edition",
+                    "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "book": "Synthetic contract fixture",
+                    "author": "Example only",
+                    "format": "pdf",
+                    "printed_labels": [
+                      "32"
+                    ],
+                    "pdf_file_pages": [
+                      31
+                    ],
+                    "epub_member": null,
+                    "epub_anchor": null,
+                    "location_scope": "block"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "get_recipes",
+      "response": {
+        "schema_version": "library-v2-draft-1",
+        "snapshot": "demo:release",
+        "page_index": 1,
+        "next_cursor": null,
+        "complete": true,
+        "errors": [],
+        "requested_ids": [
+          "demo:oversized"
+        ],
+        "roots": [],
+        "relationships": [],
+        "issues": [],
+        "items": [
+          {
+            "node": {
+              "entity": "recipe",
+              "id": "demo:oversized"
+            },
+            "revision": "0000000000000000000000000000000000000000000000000000000000000000",
+            "content_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "part_index": 1,
+            "complete": true,
+            "header": {
+              "id": "demo:oversized",
+              "title": "Synthetic oversized record"
+            },
+            "segments": [
+              {
+                "section": "method_blocks",
+                "index": 0,
+                "group_id": null,
+                "group_title": null,
+                "block": {
+                  "id": "demo:long-block",
+                  "kind": "text",
+                  "role": "method",
+                  "text": "method."
+                },
+                "text_range": {
+                  "start": 11,
+                  "end": 18,
+                  "total_characters": 18
+                },
+                "citations": [
+                  {
+                    "id": "demo:citation",
+                    "edition_id": "demo:edition",
+                    "asset_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+                    "book": "Synthetic contract fixture",
+                    "author": "Example only",
+                    "format": "pdf",
+                    "printed_labels": [
+                      "32"
+                    ],
+                    "pdf_file_pages": [
+                      31
+                    ],
+                    "epub_member": null,
+                    "epub_anchor": null,
+                    "location_scope": "block"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "tool": "search_recipes",
+      "response": {
+        "schema_version": "library-v2-draft-1",
+        "snapshot": "demo:release",
+        "page_index": 0,
+        "next_cursor": null,
+        "complete": true,
+        "errors": [
+          {
+            "code": "SNAPSHOT_UNAVAILABLE",
+            "id": null,
+            "message": "The cursor release is no longer served; restart the same query.",
+            "retry": "restart"
+          }
+        ],
+        "mode": "ranked",
+        "total": null,
+        "items": []
+      }
+    }
+  ]
+}

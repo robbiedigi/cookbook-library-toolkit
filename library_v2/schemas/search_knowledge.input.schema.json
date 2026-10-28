@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cookbook.invalid/contracts/search_knowledge.input.schema.json",
+  "type": "object",
+  "properties": {
+    "query": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2000
+    },
+    "books": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 512
+      },
+      "uniqueItems": true,
+      "maxItems": 20
+    },
+    "topics": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "technique",
+          "ingredient_reference",
+          "food_science",
+          "history_culture",
+          "personal_narrative",
+          "cooking_philosophy",
+          "menu_planning"
+        ]
+      },
+      "uniqueItems": true,
+      "maxItems": 7
+    },
+    "kinds": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "passage",
+          "method",
+          "reference",
+          "essay",
+          "menu"
+        ]
+      },
+      "uniqueItems": true,
+      "maxItems": 5
+    },
+    "recipe_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 256
+      },
+      "uniqueItems": true,
+      "maxItems": 20
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "default": 20
+    },
+    "cursor": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "query"
+  ],
+  "additionalProperties": false
+}

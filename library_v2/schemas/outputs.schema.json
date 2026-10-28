@@ -1,0 +1,642 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cookbook.invalid/contracts/outputs.schema.json",
+  "$defs": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "enum": [
+            "NOT_FOUND",
+            "UNKNOWN_BOOK",
+            "AMBIGUOUS_BOOK",
+            "STALE_REFERENCE",
+            "AMBIGUOUS_REFERENCE",
+            "INVALID_CURSOR",
+            "CURSOR_INPUT_MISMATCH",
+            "SNAPSHOT_UNAVAILABLE",
+            "INVALID_ARGUMENT",
+            "DEPENDENCY_LIMIT",
+            "DEPENDENCY_CYCLE",
+            "STALE_REVIEW",
+            "UNRESOLVED_REFERENCE",
+            "CONTENT_TOO_LARGE",
+            "UNSUPPORTED_POLICY"
+          ]
+        },
+        "message": {
+          "type": "string"
+        },
+        "id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "retry": {
+          "enum": [
+            "restart",
+            "correct_input",
+            "inspect_targets",
+            "none"
+          ]
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "title": {
+                "type": "string"
+              },
+              "edition_label": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "edition_label"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 20
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "id",
+        "retry"
+      ],
+      "additionalProperties": false
+    },
+    "recipe_card": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string"
+        },
+        "book_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "kind": {
+          "enum": [
+            "dish",
+            "component",
+            "beverage",
+            "unknown"
+          ]
+        },
+        "dish_type": {
+          "enum": [
+            "braise",
+            "bread",
+            "butter",
+            "cake",
+            "cocktail",
+            "cookie",
+            "crumbs",
+            "curry",
+            "dip",
+            "dough",
+            "dressing",
+            "drink",
+            "dumpling",
+            "egg_dish",
+            "filling",
+            "fish_dish",
+            "fritter",
+            "frosting",
+            "frozen_dessert",
+            "fruit_dish",
+            "grain",
+            "meat_dish",
+            "noodles",
+            "other",
+            "pancake",
+            "pasta",
+            "pastry",
+            "pickle",
+            "pie",
+            "pizza",
+            "preserve",
+            "pudding",
+            "rice",
+            "roast",
+            "salad",
+            "sandwich",
+            "sauce",
+            "seasoning",
+            "soup",
+            "stew",
+            "stock",
+            "syrup",
+            "tart",
+            "topping",
+            "unknown",
+            "vegetable_dish"
+          ]
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "https://cookbook.invalid/contracts/reader.schema.json#/$defs/source"
+          },
+          "description": "Compact locators for the complete source item, not exact attribution for the excerpt. Read the item for scoped source references and complete cooking evidence."
+        },
+        "qualification_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Material source limitations are detailed on the full read; an empty list does not certify completeness or dependency coverage."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "book_id",
+        "kind",
+        "dish_type",
+        "excerpt",
+        "sources",
+        "qualification_codes"
+      ],
+      "additionalProperties": false
+    },
+    "knowledge_card": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "heading_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "technique",
+              "ingredient_reference",
+              "food_science",
+              "history_culture",
+              "personal_narrative",
+              "cooking_philosophy",
+              "menu_planning"
+            ]
+          }
+        },
+        "excerpt": {
+          "type": "string"
+        },
+        "related_recipe_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "https://cookbook.invalid/contracts/reader.schema.json#/$defs/source"
+          },
+          "description": "Compact locators for the complete source item, not exact attribution for the excerpt. Read the item for scoped source references and complete cooking evidence."
+        },
+        "qualification_codes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Material source limitations are detailed on the full read; an empty list does not certify completeness or dependency coverage."
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "heading_path",
+        "topics",
+        "excerpt",
+        "related_recipe_ids",
+        "sources",
+        "qualification_codes"
+      ],
+      "additionalProperties": false
+    },
+    "delivery": {
+      "$ref": "https://cookbook.invalid/contracts/reader.schema.json#/$defs/delivery"
+    },
+    "root_status": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "status": {
+          "enum": [
+            "ok",
+            "error"
+          ]
+        },
+        "error": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/error"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "delivered_as": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/clean_node"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "status",
+        "error"
+      ],
+      "additionalProperties": false
+    },
+    "relationship_view": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "from": {
+          "$ref": "https://cookbook.invalid/contracts/content.schema.json#/$defs/node"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "https://cookbook.invalid/contracts/content.schema.json#/$defs/node"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "type": "string"
+        },
+        "disposition": {
+          "enum": [
+            "required",
+            "assembled",
+            "optional",
+            "unresolved",
+            "choice"
+          ]
+        },
+        "application": {
+          "type": "string"
+        },
+        "choice_group": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "from",
+        "target",
+        "kind",
+        "disposition",
+        "application",
+        "choice_group"
+      ],
+      "additionalProperties": false
+    },
+    "search": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "library-v2-reader-2"
+        },
+        "snapshot": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/error"
+          }
+        },
+        "mode": {
+          "enum": [
+            "enumeration",
+            "ranked"
+          ]
+        },
+        "total": {
+          "anyOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "$ref": "#/$defs/recipe_card"
+              },
+              {
+                "$ref": "#/$defs/knowledge_card"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "snapshot",
+        "next_cursor",
+        "page_index",
+        "complete",
+        "errors",
+        "mode",
+        "total",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "batch": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "library-v2-reader-2"
+        },
+        "snapshot": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "next_cursor": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4096
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "page_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "errors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/error"
+          }
+        },
+        "roots": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/root_status"
+          }
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/delivery"
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/relationship_view"
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "snapshot",
+        "next_cursor",
+        "page_index",
+        "complete",
+        "errors",
+        "roots",
+        "items",
+        "relationships"
+      ],
+      "additionalProperties": false
+    },
+    "clean_node": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "enum": [
+            "recipe",
+            "knowledge"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "entity",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "clean_citation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "edition_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "book": {
+          "type": "string"
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "format": {
+          "enum": [
+            "pdf",
+            "epub",
+            "image",
+            "other",
+            "unknown"
+          ]
+        },
+        "printed_labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pdf_file_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "epub_member": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "epub_anchor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "location_scope": {
+          "enum": [
+            "block",
+            "item",
+            "section",
+            "edition",
+            "unknown"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "edition_id",
+        "book",
+        "author",
+        "format",
+        "printed_labels",
+        "pdf_file_pages",
+        "epub_member",
+        "epub_anchor",
+        "location_scope"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/search"
+    },
+    {
+      "$ref": "#/$defs/batch"
+    }
+  ]
+}

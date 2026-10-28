@@ -1,0 +1,871 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cookbook.invalid/contracts/reader.schema.json",
+  "$defs": {
+    "source": {
+      "type": "object",
+      "properties": {
+        "edition_id": {
+          "type": "string"
+        },
+        "book": {
+          "type": "string"
+        },
+        "printed_pages": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pdf_file_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "page_unknown": {
+          "const": true
+        },
+        "document": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "origin_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^https://"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "origin_url"
+          ],
+          "additionalProperties": false
+        },
+        "author": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "edition_id",
+        "book"
+      ],
+      "additionalProperties": false
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Zero-based indices into this item\u2019s sources array. A block inherits item.source_refs when absent. If item.source_refs is absent, the default is [0] for exactly one source, otherwise []. An explicit [] means no page attribution is established."
+        },
+        "basis": {
+          "enum": [
+            "normalization",
+            "accepted_correction",
+            "accepted_interpretation",
+            "generated_inference"
+          ]
+        },
+        "role": {
+          "enum": [
+            "ingredient",
+            "method",
+            "headnote",
+            "note",
+            "heading",
+            "context",
+            "prose"
+          ]
+        },
+        "applicability_ref": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Index in item.applicability[this section]; absent inherits index0 if that section has applicability. Explicit null means that block has no applicability scope. Continuation ranges inherit metadata from the first range of this value."
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "table": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "table"
+        },
+        "text": {
+          "type": "string"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "header_rows": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Zero-based indices into this item\u2019s sources array. A block inherits item.source_refs when absent. If item.source_refs is absent, the default is [0] for exactly one source, otherwise []. An explicit [] means no page attribution is established."
+        },
+        "basis": {
+          "enum": [
+            "normalization",
+            "accepted_correction",
+            "accepted_interpretation",
+            "generated_inference"
+          ]
+        },
+        "role": {
+          "enum": [
+            "ingredient",
+            "method",
+            "headnote",
+            "note",
+            "heading",
+            "context",
+            "prose"
+          ]
+        },
+        "applicability_ref": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Index in item.applicability[this section]; absent inherits index0 if that section has applicability. Explicit null means that block has no applicability scope. Continuation ranges inherit metadata from the first range of this value."
+        }
+      },
+      "required": [
+        "kind",
+        "text",
+        "rows",
+        "header_rows"
+      ],
+      "additionalProperties": false
+    },
+    "figure": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "figure"
+        },
+        "text": {
+          "type": "string"
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visual_content": {
+          "const": "not_transcribed"
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Zero-based indices into this item\u2019s sources array. A block inherits item.source_refs when absent. If item.source_refs is absent, the default is [0] for exactly one source, otherwise []. An explicit [] means no page attribution is established."
+        },
+        "basis": {
+          "enum": [
+            "normalization",
+            "accepted_correction",
+            "accepted_interpretation",
+            "generated_inference"
+          ]
+        },
+        "role": {
+          "enum": [
+            "ingredient",
+            "method",
+            "headnote",
+            "note",
+            "heading",
+            "context",
+            "prose"
+          ]
+        },
+        "applicability_ref": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "description": "Index in item.applicability[this section]; absent inherits index0 if that section has applicability. Explicit null means that block has no applicability scope. Continuation ranges inherit metadata from the first range of this value."
+        }
+      },
+      "required": [
+        "kind",
+        "text",
+        "asset_refs",
+        "visual_content"
+      ],
+      "additionalProperties": false
+    },
+    "value": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "$ref": "#/$defs/text"
+        },
+        {
+          "$ref": "#/$defs/table"
+        },
+        {
+          "$ref": "#/$defs/figure"
+        }
+      ],
+      "description": "Accepted cooking text is a plain string; archival normalization/review basis remains in the canonical archive. Generated inference is explicit. Tables preserve cells/headers/order; figures are explicitly untranscribed. Source/applicability overrides apply only to this value."
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "items"
+      ],
+      "additionalProperties": false
+    },
+    "qualification": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "affects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "action": {
+          "enum": [
+            "source_gap",
+            "choose_alternative",
+            "inspect_source",
+            "read_target",
+            "none"
+          ]
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "affects",
+        "action"
+      ],
+      "additionalProperties": false
+    },
+    "dish": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "recipe_id": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "multiplier_text": {
+          "type": "string"
+        },
+        "alternative_group": {
+          "type": "string"
+        },
+        "block_indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "text",
+        "block_indices"
+      ],
+      "additionalProperties": false
+    },
+    "menu": {
+      "type": "object",
+      "properties": {
+        "occasion": {
+          "type": "string"
+        },
+        "guest_count_text": {
+          "type": "string"
+        },
+        "dishes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dish"
+          }
+        },
+        "preparation_note_indices": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "required": [
+        "dishes",
+        "preparation_note_indices"
+      ],
+      "additionalProperties": false
+    },
+    "recipe": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "const": "recipe"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "description": "Deduplicated edition/book/page references. printed_pages are original printed labels; pdf_file_pages are file indices only when printed labels are unavailable. These are distinct, never interchangeable."
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Zero-based indices into this item\u2019s sources array. A block inherits item.source_refs when absent. If item.source_refs is absent, the default is [0] for exactly one source, otherwise []. An explicit [] means no page attribution is established."
+        },
+        "dependency_coverage": {
+          "$ref": "#/$defs/coverage",
+          "description": "Delivery completeness does not establish complete dependency review. unknown means dependencies or preparations may remain unreviewed. Record-specific scope/limitations are retained; generic definitions are given here once."
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualification"
+          }
+        },
+        "applicability": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Section-local source applicability values. unreviewed_alternatives means additional original context may describe alternatives and must not overwrite or be merged into the selected formula. Other values are verbatim material source scope."
+        },
+        "ingredients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "method": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "headnotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "additional_context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "yield": {
+          "type": "string"
+        },
+        "yield_basis": {
+          "enum": [
+            "normalization",
+            "accepted_correction",
+            "accepted_interpretation",
+            "generated_inference"
+          ]
+        },
+        "context_links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "node": {
+                "$ref": "https://cookbook.invalid/contracts/content.schema.json#/$defs/node"
+              },
+              "title": {
+                "type": "string"
+              },
+              "applicability": {
+                "const": "unreviewed"
+              }
+            },
+            "required": [
+              "node",
+              "title",
+              "applicability"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "entity",
+        "id",
+        "title",
+        "sources",
+        "dependency_coverage",
+        "ingredients",
+        "method"
+      ],
+      "additionalProperties": false
+    },
+    "knowledge": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "const": "knowledge"
+        },
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/source"
+          },
+          "description": "Deduplicated edition/book/page references. printed_pages are original printed labels; pdf_file_pages are file indices only when printed labels are unavailable. These are distinct, never interchangeable."
+        },
+        "source_refs": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "description": "Zero-based indices into this item\u2019s sources array. A block inherits item.source_refs when absent. If item.source_refs is absent, the default is [0] for exactly one source, otherwise []. An explicit [] means no page attribution is established."
+        },
+        "dependency_coverage": {
+          "$ref": "#/$defs/coverage",
+          "description": "Delivery completeness does not establish complete dependency review. unknown means dependencies or preparations may remain unreviewed. Record-specific scope/limitations are retained; generic definitions are given here once."
+        },
+        "qualifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualification"
+          }
+        },
+        "applicability": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": "Section-local source applicability values. unreviewed_alternatives means additional original context may describe alternatives and must not overwrite or be merged into the selected formula. Other values are verbatim material source scope."
+        },
+        "kind": {
+          "type": "string"
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/value"
+          }
+        },
+        "menu": {
+          "$ref": "#/$defs/menu"
+        }
+      },
+      "required": [
+        "entity",
+        "id",
+        "title",
+        "sources",
+        "dependency_coverage",
+        "kind",
+        "blocks"
+      ],
+      "additionalProperties": false
+    },
+    "item": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/recipe"
+        },
+        {
+          "$ref": "#/$defs/knowledge"
+        }
+      ]
+    },
+    "text_range": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_characters": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "total_characters"
+      ],
+      "additionalProperties": false,
+      "description": "Half-open Unicode codepoint range [start,end) within the original text, with unchanged total_characters."
+    },
+    "row_range": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_rows": {
+          "type": "integer",
+          "minimum": 0
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "total_rows"
+      ],
+      "additionalProperties": false,
+      "description": "Half-open original table row range [start,end), with unchanged total_rows. Original header row indices and text are supplied on the first range and inherited by later ranges."
+    },
+    "table_fragment": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "table"
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "kind",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "segment": {
+      "type": "object",
+      "properties": {
+        "section": {
+          "enum": [
+            "ingredients",
+            "method",
+            "headnotes",
+            "notes",
+            "additional_context",
+            "blocks",
+            "menu_dishes"
+          ]
+        },
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "group_index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "value": {},
+        "text_range": {
+          "$ref": "#/$defs/text_range"
+        },
+        "row_range": {
+          "$ref": "#/$defs/row_range"
+        }
+      },
+      "required": [
+        "section",
+        "index",
+        "value"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "section": {
+                "const": "menu_dishes"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "value": {
+                "$ref": "#/$defs/dish"
+              }
+            },
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "row_range"
+                  ]
+                },
+                {
+                  "required": [
+                    "text_range"
+                  ]
+                }
+              ]
+            }
+          },
+          "else": {
+            "properties": {
+              "value": {
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/value"
+                  },
+                  {
+                    "$ref": "#/$defs/table_fragment"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "section": {
+                "const": "ingredients"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "group_index"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "group_index"
+              ]
+            }
+          }
+        }
+      ],
+      "description": "Indexed value in its original section; ingredient values additionally name group_index. Text ranges use Unicode codepoint offsets; table row ranges preserve original row indices. The first range carries all value metadata (including table caption/header_rows); later ranges inherit it and only append exact text or rows. Never interpret a partial value as complete source evidence.",
+      "not": {
+        "required": [
+          "text_range",
+          "row_range"
+        ]
+      }
+    },
+    "delivery": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "node": {
+              "$ref": "https://cookbook.invalid/contracts/content.schema.json#/$defs/node"
+            },
+            "part_index": {
+              "const": 0
+            },
+            "complete": {
+              "const": true
+            },
+            "content": {
+              "$ref": "#/$defs/item"
+            }
+          },
+          "required": [
+            "node",
+            "part_index",
+            "complete",
+            "content"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "node": {
+              "$ref": "https://cookbook.invalid/contracts/content.schema.json#/$defs/node"
+            },
+            "part_index": {
+              "const": 0
+            },
+            "complete": {
+              "const": false
+            },
+            "header": {
+              "$ref": "#/$defs/item"
+            }
+          },
+          "required": [
+            "node",
+            "part_index",
+            "complete",
+            "header"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "node": {
+              "$ref": "https://cookbook.invalid/contracts/content.schema.json#/$defs/node"
+            },
+            "part_index": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "complete": {
+              "type": "boolean"
+            },
+            "segments": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/segment"
+              },
+              "minItems": 1
+            }
+          },
+          "required": [
+            "node",
+            "part_index",
+            "complete",
+            "segments"
+          ],
+          "additionalProperties": false
+        }
+      ],
+      "description": "Normal item: one complete content record. Oversized item: part0 contains header exactly once, subsequent ordered parts contain segments. Fetch every envelope until next_cursor is null and complete is true. Each item\u2019s last part is complete; this states delivery only."
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "reviewed_bounded",
+            "unknown",
+            "stale"
+          ]
+        },
+        "scope": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$ref": "#/$defs/item"
+}

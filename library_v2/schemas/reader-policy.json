@@ -1,0 +1,41 @@
+{
+  "archive_only_qualifications": [
+    {
+      "code": "source_warning",
+      "message": "Reviewed OCR with retained source evidence; prose headnotes and notes remain in the ordered method excerpt."
+    },
+    {
+      "code": "source_warning",
+      "message": "Ingredient and method excerpts retain wrapped source lines. Small printed measure/yield discrepancies remain as approved."
+    },
+    {
+      "code": "note_coverage",
+      "message": "Relevant parent notes have not been systematically reviewed; read the parent cooking view for a specific missing method or note; use its full view when original evidence or a source conflict needs inspection."
+    },
+    {
+      "code": "SOURCE_QUALIFICATION",
+      "message": "Supporting source text; not a verified structured recipe."
+    },
+    {
+      "code": "SOURCE_QUALIFICATION",
+      "message": "Images retained by source reference; visual content is not transcribed."
+    }
+  ],
+  "generic_coverage_scopes": [
+    "Dependency coverage has not been reviewed against the current source.",
+    "Retained source knowledge; dependency applicability not reviewed.",
+    "No accepted bounded dependency review",
+    "Retained attached source context; cooking applicability is unreviewed."
+  ],
+  "generic_coverage_limitations": [
+    "Read the source for missing preparations; unknown coverage does not mean no dependencies.",
+    "Source delivery does not certify a complete recipe or reviewed dependency coverage."
+  ],
+  "applicability_aliases": {
+    "Additional original recipe context, separate from assembled ingredients and method. It may describe alternatives or pre-normalization text. Applicability has not been reviewed; do not automatically merge it into the selected formula or overwrite reviewed normalization.": "unreviewed_alternatives"
+  },
+  "definitions": {
+    "unreviewed_alternatives": "Additional source context is separate from the selected formula. It may describe alternatives; applicability is unreviewed. Do not merge it into selected ingredients or method.",
+    "unknown_coverage": "Unknown dependency coverage does not establish no dependencies or complete cooking instructions. Read linked preparations and specific limitations."
+  }
+}

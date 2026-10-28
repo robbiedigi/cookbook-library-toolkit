@@ -1,0 +1,1637 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cookbook.invalid/contracts/content.schema.json",
+  "$defs": {
+    "node": {
+      "type": "object",
+      "properties": {
+        "entity": {
+          "enum": [
+            "recipe",
+            "knowledge"
+          ]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "entity",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "citation": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "edition_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "asset_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "book": {
+          "type": "string"
+        },
+        "author": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "format": {
+          "enum": [
+            "pdf",
+            "epub",
+            "image",
+            "other",
+            "unknown"
+          ]
+        },
+        "printed_labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "pdf_file_pages": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "epub_member": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "epub_anchor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "location_scope": {
+          "enum": [
+            "block",
+            "item",
+            "section",
+            "edition",
+            "unknown"
+          ]
+        },
+        "document": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            "origin_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "pattern": "^https://"
+            }
+          },
+          "required": [
+            "path",
+            "sha256",
+            "origin_url"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "id",
+        "edition_id",
+        "asset_sha256",
+        "book",
+        "author",
+        "format",
+        "printed_labels",
+        "pdf_file_pages",
+        "epub_member",
+        "epub_anchor",
+        "location_scope"
+      ],
+      "additionalProperties": false
+    },
+    "span": {
+      "type": "object",
+      "properties": {
+        "source_record_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "source_block_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "legacy_path": {
+          "type": "array",
+          "items": {
+            "type": [
+              "string",
+              "integer"
+            ]
+          }
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "text_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "citation_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "required": [
+        "source_record_sha256",
+        "source_block_id",
+        "start",
+        "end",
+        "text_sha256",
+        "citation_id"
+      ],
+      "additionalProperties": false
+    },
+    "block": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "kind": {
+          "enum": [
+            "text",
+            "table",
+            "figure"
+          ]
+        },
+        "role": {
+          "enum": [
+            "ingredient",
+            "method",
+            "headnote",
+            "note",
+            "heading",
+            "context",
+            "prose"
+          ]
+        },
+        "text": {
+          "type": "string"
+        },
+        "basis": {
+          "enum": [
+            "source",
+            "normalization",
+            "accepted_correction",
+            "accepted_interpretation",
+            "generated_inference"
+          ]
+        },
+        "source_spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/span"
+          }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "group_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "applicability": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "ingredient": {
+          "type": "object",
+          "properties": {
+            "identity": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "role": {
+              "enum": [
+                "primary",
+                "supporting",
+                "unknown"
+              ]
+            },
+            "optional": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "variant_scope": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "identity",
+            "role",
+            "optional",
+            "variant_scope"
+          ],
+          "additionalProperties": false
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "header_rows": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "asset_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "ingredient_occurrences": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "start": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "end": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "optional": {
+                "type": [
+                  "boolean",
+                  "null"
+                ]
+              },
+              "variant_scope": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "presence_basis": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "start",
+              "end",
+              "text",
+              "optional",
+              "variant_scope",
+              "presence_basis"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "role",
+        "text",
+        "basis",
+        "source_spans",
+        "evidence_refs"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "table"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "rows",
+              "header_rows"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "figure"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "asset_refs"
+            ]
+          }
+        }
+      ]
+    },
+    "uncertainty": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "message": {
+          "type": "string"
+        },
+        "affects": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        },
+        "action": {
+          "enum": [
+            "source_gap",
+            "choose_alternative",
+            "inspect_source",
+            "read_target",
+            "none"
+          ]
+        },
+        "citation_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "affects",
+        "action",
+        "citation_ids"
+      ],
+      "additionalProperties": false
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "reviewed_bounded",
+            "unknown",
+            "stale"
+          ]
+        },
+        "scope": {
+          "type": "string"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "scope",
+        "limitations"
+      ],
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "enum": [
+            "dish",
+            "component",
+            "beverage",
+            "unknown"
+          ]
+        },
+        "dish_type": {
+          "enum": [
+            "braise",
+            "bread",
+            "butter",
+            "cake",
+            "cocktail",
+            "cookie",
+            "crumbs",
+            "curry",
+            "dip",
+            "dough",
+            "dressing",
+            "drink",
+            "dumpling",
+            "egg_dish",
+            "filling",
+            "fish_dish",
+            "fritter",
+            "frosting",
+            "frozen_dessert",
+            "fruit_dish",
+            "grain",
+            "meat_dish",
+            "noodles",
+            "other",
+            "pancake",
+            "pasta",
+            "pastry",
+            "pickle",
+            "pie",
+            "pizza",
+            "preserve",
+            "pudding",
+            "rice",
+            "roast",
+            "salad",
+            "sandwich",
+            "sauce",
+            "seasoning",
+            "soup",
+            "stew",
+            "stock",
+            "syrup",
+            "tart",
+            "topping",
+            "unknown",
+            "vegetable_dish"
+          ]
+        },
+        "status": {
+          "enum": [
+            "source_bound_assessment",
+            "unknown",
+            "stale"
+          ]
+        },
+        "uncertain_fields": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "kind",
+              "dish_type"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "evidence_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "kind",
+        "dish_type",
+        "status",
+        "uncertain_fields",
+        "evidence_ref"
+      ],
+      "additionalProperties": false
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_record_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "archive_record_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "review_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "required": [
+        "source_record_sha256",
+        "archive_record_sha256",
+        "review_refs"
+      ],
+      "additionalProperties": false
+    },
+    "book": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "library-v2-draft-1"
+        },
+        "entity": {
+          "const": "book"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "authors": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "edition_label": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "isbn": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "legacy_book_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "sha256": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "format": {
+                "enum": [
+                  "pdf",
+                  "epub",
+                  "image",
+                  "other",
+                  "unknown"
+                ]
+              },
+              "archive_ref": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            },
+            "required": [
+              "sha256",
+              "format",
+              "archive_ref"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "entity",
+        "id",
+        "revision",
+        "title",
+        "aliases",
+        "authors",
+        "edition_label",
+        "isbn",
+        "legacy_book_id",
+        "assets"
+      ],
+      "additionalProperties": false
+    },
+    "recipe": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "library-v2-draft-1"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "edition_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string"
+        },
+        "citations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/citation"
+          },
+          "minItems": 1
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uncertainty"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "entity": {
+          "const": "recipe"
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "yield": {
+          "type": "object",
+          "properties": {
+            "text": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "basis": {
+              "enum": [
+                "source",
+                "accepted_correction",
+                "accepted_interpretation",
+                "unknown"
+              ]
+            },
+            "evidence_refs": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              }
+            }
+          },
+          "required": [
+            "text",
+            "basis",
+            "evidence_refs"
+          ],
+          "additionalProperties": false
+        },
+        "ingredient_groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "title": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "blocks": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/block"
+                }
+              }
+            },
+            "required": [
+              "id",
+              "title",
+              "blocks"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "method_blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        },
+        "headnotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        },
+        "additional_context": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        },
+        "classification": {
+          "$ref": "#/$defs/classification"
+        },
+        "dependency_coverage": {
+          "$ref": "#/$defs/coverage"
+        },
+        "variant_exclusions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "node": {
+                "$ref": "#/$defs/node"
+              },
+              "source_spans": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/span"
+                }
+              },
+              "reason": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "node",
+              "source_spans",
+              "reason"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "context_links": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "node": {
+                "$ref": "#/$defs/node"
+              },
+              "title": {
+                "type": "string"
+              },
+              "applicability": {
+                "const": "unreviewed"
+              }
+            },
+            "required": [
+              "node",
+              "title",
+              "applicability"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "revision",
+        "edition_id",
+        "title",
+        "citations",
+        "uncertainties",
+        "provenance",
+        "entity",
+        "aliases",
+        "yield",
+        "ingredient_groups",
+        "method_blocks",
+        "headnotes",
+        "notes",
+        "additional_context",
+        "classification",
+        "dependency_coverage",
+        "variant_exclusions"
+      ],
+      "additionalProperties": false
+    },
+    "menu": {
+      "type": "object",
+      "properties": {
+        "occasion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "guest_count_text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "dishes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "text": {
+                "type": "string"
+              },
+              "recipe_id": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "role": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "multiplier_text": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "alternative_group": {
+                "anyOf": [
+                  {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 256
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "source_block_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 256
+                }
+              }
+            },
+            "required": [
+              "id",
+              "text",
+              "recipe_id",
+              "role",
+              "multiplier_text",
+              "alternative_group",
+              "source_block_ids"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "preparation_note_block_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          }
+        }
+      },
+      "required": [
+        "occasion",
+        "guest_count_text",
+        "dishes",
+        "preparation_note_block_ids"
+      ],
+      "additionalProperties": false
+    },
+    "selection": {
+      "type": "object",
+      "properties": {
+        "source_node": {
+          "$ref": "#/$defs/node"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "included_spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/span"
+          },
+          "minItems": 1
+        },
+        "excluded_spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/span"
+          }
+        },
+        "review_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "source_binding_sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "source_node",
+        "scope",
+        "included_spans",
+        "excluded_spans",
+        "review_ref",
+        "source_binding_sha256"
+      ],
+      "additionalProperties": false
+    },
+    "knowledge": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "library-v2-draft-1"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "revision": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "edition_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "title": {
+          "type": "string"
+        },
+        "citations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/citation"
+          },
+          "minItems": 1
+        },
+        "uncertainties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/uncertainty"
+          }
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "entity": {
+          "const": "knowledge"
+        },
+        "kind": {
+          "enum": [
+            "passage",
+            "method",
+            "reference",
+            "essay",
+            "menu"
+          ]
+        },
+        "heading_path": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/block"
+          }
+        },
+        "topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "technique",
+              "ingredient_reference",
+              "food_science",
+              "history_culture",
+              "personal_narrative",
+              "cooking_philosophy",
+              "menu_planning"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "uncertain_topics": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "technique",
+              "ingredient_reference",
+              "food_science",
+              "history_culture",
+              "personal_narrative",
+              "cooking_philosophy",
+              "menu_planning"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "topic_status": {
+          "enum": [
+            "source_bound_assessment",
+            "unknown",
+            "stale"
+          ]
+        },
+        "related_recipe_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "uniqueItems": true
+        },
+        "dependency_coverage": {
+          "$ref": "#/$defs/coverage"
+        },
+        "menu": {
+          "$ref": "#/$defs/menu"
+        },
+        "selection": {
+          "$ref": "#/$defs/selection"
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "revision",
+        "edition_id",
+        "title",
+        "citations",
+        "uncertainties",
+        "provenance",
+        "entity",
+        "kind",
+        "heading_path",
+        "blocks",
+        "topics",
+        "uncertain_topics",
+        "topic_status",
+        "related_recipe_ids",
+        "dependency_coverage"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "menu"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "menu"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "menu"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "relationship": {
+      "type": "object",
+      "properties": {
+        "schema_version": {
+          "const": "library-v2-draft-1"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "from": {
+          "$ref": "#/$defs/node"
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/node"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "kind": {
+          "enum": [
+            "component",
+            "method_reference",
+            "variation_of",
+            "related_source",
+            "illustration",
+            "accompaniment"
+          ]
+        },
+        "disposition": {
+          "enum": [
+            "required",
+            "assembled",
+            "optional",
+            "unresolved",
+            "choice"
+          ]
+        },
+        "application": {
+          "type": "string"
+        },
+        "choice_group": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_spans": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/span"
+          },
+          "minItems": 1
+        },
+        "review_ref": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "review_status": {
+          "enum": [
+            "accepted",
+            "stale",
+            "unknown"
+          ]
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "node": {
+                "$ref": "#/$defs/node"
+              },
+              "revision": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "node",
+              "revision"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 1
+        },
+        "assembly_sha256": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "schema_version",
+        "id",
+        "from",
+        "target",
+        "kind",
+        "disposition",
+        "application",
+        "choice_group",
+        "evidence_spans",
+        "review_ref",
+        "review_status",
+        "bindings",
+        "assembly_sha256"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "enum": [
+                  "required",
+                  "assembled",
+                  "choice"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "target": {
+                "$ref": "#/$defs/node"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "choice"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "choice_group": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "choice_group": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "assembled"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "assembly_sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "remapping": {
+      "type": "object",
+      "properties": {
+        "old_namespace": {
+          "enum": [
+            "recipe",
+            "section",
+            "method",
+            "passage",
+            "block",
+            "dependency_section"
+          ]
+        },
+        "old_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "old_revision": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "status": {
+          "enum": [
+            "exact",
+            "split",
+            "merged",
+            "stale"
+          ]
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "node": {
+                "$ref": "#/$defs/node"
+              },
+              "source_spans": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/span"
+                }
+              }
+            },
+            "required": [
+              "node",
+              "source_spans"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "review_ref": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 256
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "old_namespace",
+        "old_id",
+        "old_revision",
+        "status",
+        "targets",
+        "review_ref"
+      ],
+      "additionalProperties": false
+    },
+    "read_target": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/node"
+          },
+          "minItems": 1
+        },
+        "source_block_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "parent_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "policy": {
+          "const": "complete-source-blocks-v1"
+        }
+      },
+      "required": [
+        "id",
+        "targets",
+        "source_block_ids",
+        "parent_ids",
+        "policy"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/book"
+    },
+    {
+      "$ref": "#/$defs/recipe"
+    },
+    {
+      "$ref": "#/$defs/knowledge"
+    },
+    {
+      "$ref": "#/$defs/relationship"
+    },
+    {
+      "$ref": "#/$defs/remapping"
+    }
+  ]
+}

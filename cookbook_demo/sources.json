@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "verified_on": "2026-10-28",
+  "books": [
+    {
+      "gutenberg_id": "45572",
+      "title": "The National Cook Book, 9th ed.",
+      "author": "Hannah Mary Peterson",
+      "edition": "1856, ninth edition",
+      "catalog_url": "https://www.gutenberg.org/ebooks/45572",
+      "download_url": "https://www.gutenberg.org/cache/epub/45572/pg45572-images.html",
+      "sha256": "24bffc19c9e9bde90de6278148e497cc12c67a305441b54b39362afa84d28a41",
+      "rights": "Project Gutenberg catalog: public domain in the USA; check local law elsewhere.",
+      "credits": "Project Gutenberg and the Online Distributed Proofreading Team; original source notices retained in downloaded HTML.",
+      "start_at": "SOUPS.",
+      "end_before": "SICK.",
+      "recipe_headings": [
+        "BEEF SOUP.",
+        "VEAL SOUP.",
+        "GREEN CORN SOUP.",
+        "PEA SOUP.",
+        "SUCCOTASH.",
+        "TO MAKE NOODLES FOR SOUP."
+      ]
+    },
+    {
+      "gutenberg_id": "36689",
+      "title": "The New England Cook Book, or Young Housekeeper\u2019s Guide",
+      "author": "Anonymous",
+      "edition": "1836",
+      "catalog_url": "https://www.gutenberg.org/ebooks/36689",
+      "download_url": "https://www.gutenberg.org/cache/epub/36689/pg36689-images.html",
+      "sha256": "8a361419856c6b589266507dd7a183d17a8b8a55dd5bb4f75be05d1a964adff1",
+      "rights": "Project Gutenberg catalog: public domain in the USA; check local law elsewhere.",
+      "credits": "Project Gutenberg and the Online Distributed Proofreading Team; original source notices retained in downloaded HTML.",
+      "start_at": "PRACTICAL COOKERY.",
+      "end_before": "Miscellaneous Receipts, and observations useful to young housekeepers.",
+      "recipe_headings": [
+        "2. Roast Beef.",
+        "3. Beef Steak.",
+        "31. Chicken Pie.",
+        "46. Chicken Salad.",
+        "48. Apple Sauce.",
+        "50. Tomato Catsup."
+      ]
+    }
+  ]
+}

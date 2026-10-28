@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://cookbook.invalid/contracts/search_recipes.input.schema.json",
+  "type": "object",
+  "properties": {
+    "query": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "filters": {
+      "type": "object",
+      "properties": {
+        "books": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 512
+          },
+          "uniqueItems": true,
+          "maxItems": 20
+        },
+        "kind": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "dish",
+              "component",
+              "beverage",
+              "unknown"
+            ]
+          },
+          "uniqueItems": true,
+          "maxItems": 4
+        },
+        "dish_type": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "braise",
+              "bread",
+              "butter",
+              "cake",
+              "cocktail",
+              "cookie",
+              "crumbs",
+              "curry",
+              "dip",
+              "dough",
+              "dressing",
+              "drink",
+              "dumpling",
+              "egg_dish",
+              "filling",
+              "fish_dish",
+              "fritter",
+              "frosting",
+              "frozen_dessert",
+              "fruit_dish",
+              "grain",
+              "meat_dish",
+              "noodles",
+              "other",
+              "pancake",
+              "pasta",
+              "pastry",
+              "pickle",
+              "pie",
+              "pizza",
+              "preserve",
+              "pudding",
+              "rice",
+              "roast",
+              "salad",
+              "sandwich",
+              "sauce",
+              "seasoning",
+              "soup",
+              "stew",
+              "stock",
+              "syrup",
+              "tart",
+              "topping",
+              "unknown",
+              "vegetable_dish"
+            ]
+          },
+          "uniqueItems": true,
+          "maxItems": 46
+        },
+        "include_ingredients": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "match": {
+                    "enum": [
+                      "identity",
+                      "family"
+                    ]
+                  },
+                  "presence": {
+                    "enum": [
+                      "required_only",
+                      "any_variant_or_optional"
+                    ]
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "maxItems": 20,
+          "description": "Each term must match an ingredient occurrence. A string defaults to required_only, which matches only positively identified required occurrences and can omit source-ambiguous cases. Use presence:any_variant_or_optional for discovery across all listed occurrences."
+        },
+        "exclude_ingredients": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 200
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 200
+                  },
+                  "match": {
+                    "enum": [
+                      "identity",
+                      "family"
+                    ]
+                  },
+                  "presence": {
+                    "enum": [
+                      "required_only",
+                      "any_variant_or_optional"
+                    ]
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "maxItems": 20,
+          "description": "A string excludes matches in any listed occurrence, including optional, alternative and uncertain occurrences. Identity matching retains food and derivative distinctions."
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "preferences": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200
+      },
+      "maxItems": 10
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "default": 20
+    },
+    "cursor": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [],
+  "additionalProperties": false
+}
